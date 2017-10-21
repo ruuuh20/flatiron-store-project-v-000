@@ -66,11 +66,13 @@ describe 'Feature Test: Store', :type => :feature do
       context "logged in" do
         before(:each) do
           @user = User.first
+          @user.current_cart = Cart.create
           login_as(@user, scope: :user)
         end
 
         it "tells the user who they are signed in as" do
           visit store_path
+
           expect(page).to have_content("Signed in as #{@user.email}")
         end
 
